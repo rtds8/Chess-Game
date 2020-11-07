@@ -6,20 +6,20 @@ public class Knight_Movement : MonoBehaviour
 {
     [SerializeField] private GameObject m_currentTile;
     public List<GameObject> pathTiles = new List<GameObject>();
-    private int c = 0, f = 0, m_currentTileIndex = -1, front = -1, left = -1, right = -1, back = -1;
+    private int counter = 0, flag = 0, m_currentTileIndex = -1, front = -1, left = -1, right = -1, back = -1;
     private bool addedAll = false;
-
+    
     void FixedUpdate()
     {
-        if (this.gameObject == Selection_Handler._instance.m_current && c == 0)
+        if (this.gameObject == Selection_Handler._instance.m_current && counter == 0)
         {
             TraceKnightsPath();
-            c = 1;
+            counter = 1;
         }
 
         if (Selection_Handler._instance.m_current == null || this.gameObject != Selection_Handler._instance.m_current)
         {
-            c = 0;
+            counter = 0;
             ClearKnightsPath();
         }
     }
@@ -28,11 +28,11 @@ public class Knight_Movement : MonoBehaviour
     {
         for (int i = 0; i < 64; i++)
         {
-            if (Board_Manager.instance.allTiles[i] == m_currentTile && f == 0)
+            if (Board_Manager.instance.allTiles[i] == m_currentTile && flag == 0)
             {
                 m_currentTileIndex = i;
                 pathTiles.Add(Board_Manager.instance.allTiles[m_currentTileIndex]);
-                f = 1;
+                flag = 1;
             }
         }
 
